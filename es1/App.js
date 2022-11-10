@@ -150,7 +150,7 @@ const App = (props) => {
   <Section style={style.sectionContainer}> CHIPS </Section>
   <View style={{ flexDirection: 'row' }} >
   
-  <Chip style={styles.chip1} icon="internet" color="red" onPress={() => console.log('Pressed')}>Internet</Chip>
+  <Chip style={styles.chip1} icon="web" color="red" onPress={() => console.log('Pressed')}>Internet</Chip>
   <Chip
               style={styles.chip2}
               icon="wifi"
