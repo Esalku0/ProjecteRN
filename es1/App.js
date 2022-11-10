@@ -5,9 +5,13 @@
  * @format
  * @flow strict-local
  */
-
+ import { Surface} from 'react-native-paper';
 import {TextInput} from 'react-native-paper';
 import { Button } from 'react-native-paper';
+import { Switch } from 'react-native-paper';
+import { Chip } from 'react-native-paper';
+import {useState, useEffect} from 'react';
+import { DateTimePickerModal } from 'react-native-paper-datetimepicker';
 
 import React from 'react';
 import {
@@ -56,12 +60,42 @@ const Section = ({ children, title }) => {
   );
 };
 
-const App = () => {
+const App = (props) => {
   const isDarkMode = useColorScheme() === 'dark';
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
 
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    
   };
+
+  const { chipKey, value, chipPressed, sel } = props;
+
+  const [selected, setSelected] = useState(false);
+  const [textColor, setTextColor] = useState(`red`);
+  const [style, setStyle] = useState({
+    borderColor: `red`,
+    backgroundColor: `grey`,
+  });
+
+  useEffect(() => {
+    if (selected) {
+      setTextColor(`red`);
+      setStyle({ borderColor: `grey`, backgroundColor: `transparent` });
+    } else {
+      setTextColor(`grey`);
+      setStyle({ borderColor: `grey`, backgroundColor: `transparent` });
+    }
+  }, [selected]);
+
+  const handlePress = () => {
+    setSelected(!selected);
+    if (chipPressed) {
+      chipPressed(selected);
+    }
+  };
+
 
   return (
     <View style={backgroundStyle}>
@@ -86,11 +120,51 @@ const App = () => {
           mode="outlined"
         />
 
-<Button icon="home" mode="elevated" onPress={() => console.log('Pressed')}>
-    Home
+<Button icon="alien" uppercase={false}  color="purple" mode="contained" onPress={() => console.log('Pressed')}>
+    Alien
   </Button>
+  <Button icon="alien" color="purple" mode="elevated" onPress={() => console.log('Pressed')}>
+    Alien
+  </Button>
+  <Button icon="alien" color="purple" mode="outlined" onPress={() => console.log('Pressed')}>
+    Alien
+  </Button>
+  <Button icon="alien" color="purple" mode="contained-tonal" onPress={() => console.log('Pressed')}>
+    Alien
+  </Button>
+<Section style={style.sectionContainer}> Descanset MANEL? </Section>
+  <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color="red" />
+  <Section style={style.sectionContainer}> BOTO EN SURFACE </Section>
+  <Surface style={styles.width} elevation={4}>
+            <Button
+              style={styles.width}
+              icon="alien"
+              color="white"
+              labelStyle={{ color: "blueviolet"}}
+              mode="contained"
+              onPress={() => console.log('Pressed')}>
+              Alien
+            </Button>
+          </Surface>
+  <Section style={style.sectionContainer}> CHIPS </Section>
+  <View style={{ flexDirection: 'row' }} >
+  
+  <Chip style={styles.chip1} icon="internet" color="red" onPress={() => console.log('Pressed')}>Internet</Chip>
+  <Chip
+              style={styles.chip2}
+              icon="wifi"
+              selected={selected}
+              selectedColor={textColor}
+              onPress={handlePress}>
+              {value}
+              Wifi
+            </Chip>
+            </View>
+
+
         </View>
       </ScrollView>
+
     </View>
   );
 };
@@ -99,6 +173,10 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
+  },
+  width: {
+    width: 340,
+    alignSelf: 'center',
   },
   sectionTitle: {
     fontSize: 24,
@@ -111,6 +189,21 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  chip1: {
+    width: 95,
+    textAlign: 'center',
+  },
+  chip2: {
+    width: 70,
+    textAlign: 'center',
+  },
+  surface: {
+    padding: 8,
+    height: 80,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
