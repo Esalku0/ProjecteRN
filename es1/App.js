@@ -73,7 +73,14 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
-        <TextInput
+
+
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+
+<TextInput
           label="Email"
           placeholder='Escribe el email'
           mode="outlined"
@@ -82,22 +89,6 @@ const App = () => {
 <Button icon="home" mode="elevated" onPress={() => console.log('Pressed')}>
     Home
   </Button>
-
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-
-          <Section title="MIRA TUS CAMBIOS">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="SABER MAS">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
         </View>
       </ScrollView>
     </View>
