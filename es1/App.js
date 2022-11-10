@@ -23,7 +23,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+//manel?
 import {
   Colors,
   DebugInstructions,
@@ -107,6 +107,7 @@ const App = (props) => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        
 
 
         <View
